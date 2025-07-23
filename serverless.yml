@@ -1,0 +1,22 @@
+service: tiktok-anti-block-api
+
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: dev
+  memorySize: 512
+  timeout: 30
+
+functions:
+  processVideo:
+    handler: handler.processVideo
+    events:
+      - http:
+          path: process-video/{fileName}
+          method: post
+
+plugins:
+  - serverless-offline
